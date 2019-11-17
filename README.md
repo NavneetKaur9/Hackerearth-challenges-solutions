@@ -1,1 +1,1 @@
-Hackerearth challenges Solutions 
+Hackerearth Frontend Hiring challenge - SmartQ (ReactJS)

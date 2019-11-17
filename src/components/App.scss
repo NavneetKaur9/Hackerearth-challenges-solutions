@@ -1,0 +1,149 @@
+$background-selected-color: #585b61;
+$background-color:  #282c34;
+$white: #ffffff;
+
+
+.App {
+  background-color:$background-color;
+    .navbar{
+      padding: 0.5rem 7rem !important;
+
+      a{
+        color:$white;
+      }
+    }
+
+  .bg-light {
+    background-color: #ffc107 !important;
+  }
+
+ 
+  
+  .card {
+    width: 16rem;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 18px -2px #9e9898;
+    border-radius: 5px;
+    margin-right:20px;
+
+    .btn-outline-warning {
+      float: right;
+      clear: both;
+    }
+  }
+
+  .card-title {
+    margin-bottom: .75rem;
+    float: left;
+  }
+
+  .card-text {
+      float: right;
+  }
+
+  .footer{
+    background-color: #f4f4f5;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 80px;
+
+    &-right{
+      float: right;
+      span{
+        margin-right:5px;
+      }
+    }
+  }
+
+  .food{
+    &-card{
+
+    }
+    &-item{
+
+    }
+    &-price{
+
+    }
+  }
+  // .App-container{
+  //   padding:20px;
+  //   position: relative;
+    
+  //   .card{
+  //     background-color:$background-color;
+  //   }
+    
+  //   .user-card{
+  //     border: 2px solid $white;
+  //     margin: 15px;
+  //     width:calc(100% - 500px);
+  //     position: relative;
+
+  //     &:hover{
+  //       background-color: $background-selected-color;
+  //     }
+
+  //     &-name {
+  //       font-size: 20px;
+  //       font-weight: 600;
+  //       cursor: pointer;
+  //     }
+
+  //     &-email {
+  //       font-size: 12px;
+  //     }
+
+  //     &-website {
+  //       font-style: italic;
+  //       text-decoration: underline;
+  //       cursor: pointer;
+  //     }
+  //   }
+
+  //   .selected{
+  //     background-color: $background-selected-color;
+
+  //     .arrow{
+  //       position: absolute;
+  //       right: -164px;
+  //       top: -2px;
+  //       bottom: 0;
+  //       border: 82px solid $white;
+  //       border-top-color: transparent;
+  //       border-bottom-color: transparent;
+  //       border-right-color: transparent;
+  //     }
+  //   }
+
+  //   .sidebar{
+  //     position: absolute;
+  //     top:0;
+  //     right:0;
+  //     height:100%;
+  //     background-color: $background-selected-color;
+  //     width:400px;
+  //     padding: 20px;
+
+  //     .address-wrapper, .company-wrapper {
+  //       padding-left: 60px;
+  //     }
+  //   }
+  // }
+}
+
+// .App-logo {
+//   animation: App-logo-spin infinite 20s linear;
+//   height: 40vmin;
+//   pointer-events: none;
+// }
+
+// @keyframes App-logo-spin {
+//   from {
+//     transform: rotate(0deg);
+//   }
+//   to {
+//     transform: rotate(360deg);
+//   }
+// }
