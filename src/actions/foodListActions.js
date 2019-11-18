@@ -12,7 +12,7 @@ export function fetchUsers() {
                 response.json().then(responseBody => {
 
                     dispatch({
-                        type: actionType.FETCH_USERS,
+                        type: actionType.FETCH_FOODLIST,
                         payload: responseBody
                     });
                 });
@@ -23,11 +23,11 @@ export function fetchUsers() {
     }
 }
 
-export function setUserDetail(user) {
-    return dispatch => {
-        dispatch({
-            type: actionType.SET_USER_DETAIL,
-            payload: user
-        })
-    }
-}
+// export function setUserDetail(user) {
+//     return dispatch => {
+//         dispatch({
+//             type: actionType.SET_USER_DETAIL,
+//             payload: user
+//         })
+//     }
+// }

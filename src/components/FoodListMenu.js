@@ -4,7 +4,7 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as UsersActions from '../actions/usersActions';
+import * as actions from '../actions/foodListActions';
 import PropTypes from 'prop-types';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
@@ -15,11 +15,11 @@ import Col from 'react-bootstrap/Col';
 class FoodListMenu extends React.Component {
 
     componentDidMount() {
-        this.props.userActions.fetchUsers();
+        this.props.foodListActions.fetchUsers();
     }
 
     showUserDetail = (user) => {
-        this.props.userActions.setUserDetail(user);
+        this.props.foodListActions.setUserDetail(user);
     }
 
     displaySelectedItems = () => {
@@ -31,8 +31,9 @@ class FoodListMenu extends React.Component {
     }
 
     render() {
-        console.log(this.props);
-        let displayUsers = this.props.apiUserData.map((food, index) => {
+        console.log("props",this.props);
+        console.log("state", this.state);
+        let displayUsers = this.props.foodListState.apiFoodList.map((food, index) => {
 
             return (
                 // <Col sm>
@@ -82,22 +83,22 @@ class FoodListMenu extends React.Component {
 }
 
 FoodListMenu.propTypes = {
-    userActions: PropTypes.object,
-    apiUserData: PropTypes.array,
+    foodListActions: PropTypes.object,
+    foodListState: PropTypes.array,
     userDetail: PropTypes.object
 };
 
 function mapStateToProps(state) {
-    console.log("state", state);
+    console.log(state);
+
     return {
-        apiUserData: state.usersReducer.apiUserData,
-        userDetail: state.usersReducer.userDetail
+        foodListState: state.foodList
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        userActions: bindActionCreators(UsersActions, dispatch)
+        foodListActions: bindActionCreators(actions, dispatch)
     }
 }
 

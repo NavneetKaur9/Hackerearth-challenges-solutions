@@ -1,5 +1,5 @@
 let initialState ={
-    apiUserData: [],
+    apiFoodList: [],
     userDetail: null
 };
 

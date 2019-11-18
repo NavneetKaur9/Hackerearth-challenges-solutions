@@ -1,2 +1,1 @@
-export const FETCH_USERS = "FETCH_USERS";
-export const SET_USER_DETAIL = "SET_USER_DETAIL";
+export const FETCH_FOODLIST = "FETCH_FOODLIST";
