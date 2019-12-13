@@ -19,7 +19,7 @@ class FoodListMenu extends React.Component {
         this.props.foodListActions.fetchUsers();
     }
 
-    showUserDetail = (user) => {
+    showUserDetail=(user)=>{
         this.props.foodListActions.setUserDetail(user);
     }
 
