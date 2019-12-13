@@ -1,4 +1,4 @@
-import * as classNames from 'classnames';
+// import * as classNames from 'classnames';
 import React from 'react';
 // import { UserDetail } from './UserDetail';
 import Card from 'react-bootstrap/Card';
@@ -10,7 +10,8 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+// import Col from 'react-bootstrap/Col';
+import {Link} from 'react-router-dom';
 
 class FoodListMenu extends React.Component {
 
@@ -73,7 +74,9 @@ class FoodListMenu extends React.Component {
                     {this.displaySelectedItems()}
                     <div className="footer-right">
                         <span>Total: ₹ 243.50</span>
-                        <Button variant="outline-warning">Checkout</Button>
+                        <Link to="/checkout">
+                            <Button variant="outline-warning">Checkout</Button>
+                        </Link>
                     </div>
 
                 </div>

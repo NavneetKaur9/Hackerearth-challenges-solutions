@@ -15,21 +15,17 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="App">
+            <>
                 <Navbar bg="light" variant="light">
-                    <Navbar.Brand href="#home">Buffet</Navbar.Brand>
-                    {/* <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
-                    </Nav> */}
+                    <Navbar.Brand>Buffet</Navbar.Brand>
+                   
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.search} />
                         <Button variant="light">Search</Button>
                     </Form>
                 </Navbar>
                 <FoodListMenu />
-            </div>
+            </>
         );
     }
 }

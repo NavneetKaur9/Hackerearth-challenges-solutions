@@ -1,15 +1,14 @@
 import initialState from "./initialState";
 import { FETCH_FOODLIST } from "../actions/actionTypes";
+import { handleActions } from 'redux-actions';
 
-export default function foodList(state=initialState,action){
-    switch(action.type){
-        case FETCH_FOODLIST:            
-            return {
-                ...state,
-                apiFoodList: action.payload
-            }
-        
-        default:
-            return state;
-    }
-}
+let reducer = {
+    [FETCH_FOODLIST]: (state, action) => {
+        return {
+            ...state,
+            apiFoodList: action.payload
+        };
+    },
+};
+
+export default handleActions(reducer, initialState);
