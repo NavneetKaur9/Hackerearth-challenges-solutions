@@ -1,6 +1,6 @@
 import initialState from './initialState';
-import {FETCH_FOODLIST} from '../actions/actionTypes';
-import {handleActions} from 'redux-actions';
+import { FETCH_FOODLIST, UPDATE_TOTAL_PRICE } from '../actions/actionTypes';
+import { handleActions } from 'redux-actions';
 
 const reducer = {
   [FETCH_FOODLIST]: (state, action) => {
@@ -9,6 +9,12 @@ const reducer = {
       apiFoodList: action.payload,
     };
   },
+  [UPDATE_TOTAL_PRICE]: (state, action) => {
+    return {
+      ...state,
+      totalPrice: action.payload
+    }
+  }
 };
 
 export default handleActions(reducer, initialState);

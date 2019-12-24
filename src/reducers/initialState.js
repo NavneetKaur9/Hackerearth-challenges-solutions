@@ -1,6 +1,6 @@
 const initialState ={
   apiFoodList: [],
-  userDetail: null,
+  totalPrice: 0,
 };
 
 export default initialState;

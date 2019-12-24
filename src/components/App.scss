@@ -14,29 +14,35 @@ $white: #ffffff;
   }
 }
 
+.card-header{
+  background-color: #fec107 !important;
+  color: white;
+}
 
-.card {
-  width: 16rem;
-  margin-bottom: 20px;
-  box-shadow: 1px 1px 18px -2px #9e9898;
-  border-radius: 5px;
-  margin-right:20px;
-
-  .btn-outline-warning {
+.foodListMenu{
+  .card {
+    width: 16rem;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 18px -2px #9e9898;
+    border-radius: 5px;
+    margin-right:20px;
+    
+    .btn-outline-warning,.btn-group {
+      float: right;
+      clear: both;
+    }
+  }
+  
+  .card-title {
+    margin-bottom: .75rem;
+    float: left;
+  }
+  
+  .card-text {
     float: right;
-    clear: both;
   }
 }
-
-.card-title {
-  margin-bottom: .75rem;
-  float: left;
-}
-
-.card-text {
-    float: right;
-}
-
+  
 .footer{
   background-color: #f4f4f5;
   position: fixed;
@@ -51,4 +57,18 @@ $white: #ffffff;
     }
   }
 }
+.checkout{
+  .list-group-item{
+    display: flex;
+    flex-direction: column;
 
+    &__itemDetail,&__priceDetail{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    &__priceDetail{
+      color:#5e6b7d;
+    }
+  }
+}

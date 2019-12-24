@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
+import FoodListMenu from './components/FoodListMenu';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
-import {Checkout} from './components/checkout';
+import Checkout from './components/checkout';
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,7 +20,7 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route path="/checkout" component={Checkout}/>
-          <Route path="/" component={App}/>
+          <Route path="/" component={FoodListMenu}/>
         </Switch>
       </Router>
     </Provider>, document.getElementById('root'));

@@ -1,6 +1,4 @@
-// import * as classNames from 'classnames';
 import React from 'react';
-// import { UserDetail } from './UserDetail';
 import Card from 'react-bootstrap/Card';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,35 +8,51 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
-import {Link} from 'react-router-dom';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import { foodListMenu } from "../data";
+import Header from './Header';
 
 class FoodListMenu extends React.Component {
 
     componentDidMount() {
-        this.props.foodListActions.fetchUsers();
+        this.props.foodListActions.setFoodList(foodListMenu);
     }
 
-    showUserDetail=(user)=>{
-        this.props.foodListActions.setUserDetail(user);
+    addItem = (id) => {
+
+        this.props.foodListState.apiFoodList.map((food, i) => {
+            if (id === food.id) {
+                if (food.quantity) {
+                    food.quantity++;
+                } else {
+                    food.quantity = 1
+                }
+                let price = this.props.foodListState.totalPrice + food.price;
+                this.props.foodListActions.updateTotalPrice(price);
+            }
+
+            return food
+        });
+        this.props.foodListActions.setFoodList(this.props.foodListState.apiFoodList);
     }
 
-    displaySelectedItems = () => {
-        return (<span>3 x non-veg meals</span>)
-    }
-
-    addItem = (idx) => {
-        console.log(idx);
+    removeItem = (id) => {
+        this.props.foodListState.apiFoodList.map((food, i) => {
+            if (id === food.id) {
+                food.quantity--;
+                let price = this.props.foodListState.totalPrice - food.price;
+                this.props.foodListActions.updateTotalPrice(price);
+            }
+            return food
+        });
+        this.props.foodListActions.setFoodList(this.props.foodListState.apiFoodList);
     }
 
     render() {
-        console.log("props",this.props);
-        console.log("state", this.state);
-        let displayUsers = this.props.foodListState.apiFoodList.map((food, index) => {
+        let displayFoodItems = this.props.foodListState.apiFoodList.map((food, index) => {
 
             return (
-                // <Col sm>
-                <Card key={index}>
+                <Card key={food.id}>
                     <Card.Body>
                         <Card.Title>
                             {food.itemname}
@@ -46,54 +60,60 @@ class FoodListMenu extends React.Component {
                         <Card.Text>
                             ₹{food.price}
                         </Card.Text>
-                        <Button variant="outline-warning" onClick={this.addItem.bind(this, index)}>Add</Button>
+
+                        {(food.quantity > 0) ? (
+                            <ButtonGroup aria-label="Basic example">
+                                <Button variant="outline-warning" onClick={this.removeItem.bind(this, food.id)}>-</Button>
+                                <Button variant="outline-warning">{food.quantity}</Button>
+                                <Button variant="outline-warning" onClick={this.addItem.bind(this, food.id)}> +</Button>
+                            </ButtonGroup>
+                        ) : (
+                                <Button variant="outline-warning" onClick={this.addItem.bind(this, food.id)}>Add</Button>
+                            )
+                        }
+
                     </Card.Body>
                 </Card>
-                // </Col>
             );
         });
 
-
+        let displaySelectedItems = this.props.foodListState.apiFoodList.map((food, index) => {
+            if (food.quantity) {
+                return (<span key={food.id}>{food.quantity} X {food.itemname}, </span>)
+            }
+        });
 
         return (
-            <div className="App-container">
-                <Jumbotron fluid>
-                    <Container>
-                        <h4>Lunch</h4>
-                        {/* <Container> */}
-                        <Row>
-                            {displayUsers}
-                        </Row>
-                        {/* </Container> */}
-                        {/* {this.props.userDetail && (
-                            <UserDetail showUserDetailOf={this.props.userDetail} />
-                        )} */}
-                    </Container>
-                </Jumbotron>
-                <div className="footer">
-                    {this.displaySelectedItems()}
-                    <div className="footer-right">
-                        <span>Total: ₹ 243.50</span>
-                        <Link to="/checkout">
-                            <Button variant="outline-warning">Checkout</Button>
-                        </Link>
+            <>
+                <Header />
+                <div className="App-container">
+                    <Jumbotron fluid>
+                        <Container className="foodListMenu">
+                            <h4>Lunch</h4>
+                            <Row>
+                                {displayFoodItems}
+                            </Row>
+                        </Container>
+                    </Jumbotron>
+                    <div className="footer">
+                        {displaySelectedItems}
+                        <div className="footer-right">
+                            <span>Total: ₹ {this.props.foodListState.totalPrice}</span>
+                            <Button variant="outline-warning" onClick={() => { this.props.history.push('/checkout') }}>Checkout</Button>
+                        </div>
                     </div>
-
                 </div>
-            </div>
+            </>
         );
     }
 }
 
 FoodListMenu.propTypes = {
     foodListActions: PropTypes.object,
-    foodListState: PropTypes.array,
-    userDetail: PropTypes.object
+    foodListState: PropTypes.object,
 };
 
 function mapStateToProps(state) {
-    console.log(state);
-
     return {
         foodListState: state.foodList
     }
