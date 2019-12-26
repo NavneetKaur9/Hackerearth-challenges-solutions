@@ -1,20 +1,21 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as stuffActions from '../actions/stuffActions';
+import { fetchPosts, receivePosts, toggleLike } from '../actions/postsActions';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-class stuffList extends React.Component {
-    componentWillMount() {
-        if(!localStorage.getItem('imageList')){
-            this.props.stuffActions.fetchStuff();
-        }else{
-            this.props.stuffActions.receiveStuff(JSON.parse(localStorage.getItem('imageList')))
+class PostsContainer extends React.Component {
+
+    componentDidMount() {
+        if (!localStorage.getItem('imageList')) {
+            this.props.fetchPosts();
+        }
+        else {
+            this.props.receivePosts(JSON.parse(localStorage.getItem('imageList')))
         }
     }
 
-    toggleLike=(id)=>{
-        this.props.stuffActions.toggleLike(id);
+    toggleLike = (id) => {
+        this.props.toggleLike(id);
     }
 
     renderData(item) {
@@ -23,18 +24,18 @@ class stuffList extends React.Component {
                 <img src={item.Image} className="card-img-top" alt="insta" />
                 <div className="row image-icons-sections">
                     <div className="col-md-2">
-                        {item.isLiked && (<i className="fas fa-heart fa-2x" onClick={()=>this.toggleLike(item.id)}></i>)}
-                        {!item.isLiked && (<i className="far fa-heart fa-2x" onClick={()=>this.toggleLike(item.id)}></i>)}
+                        {item.isLiked && (<i className="fas fa-heart fa-2x" onClick={() => this.toggleLike(item.id)}></i>)}
+                        {!item.isLiked && (<i className="far fa-heart fa-2x" onClick={() => this.toggleLike(item.id)}></i>)}
                     </div>
                     <div className="col-md-2">
                         <i className="far fa-comment fa-2x"></i>
                     </div>
                     <div className="col-md-2 offset-md-6">
                         <div className="dropdown dropleft">
-                            <i className="fas fa-ellipsis-v fa-2x " id="dropdownMenuButton" data-toggle="dropdown"></i> 
+                            <i className="fas fa-ellipsis-v fa-2x " id="dropdownMenuButton" data-toggle="dropdown"></i>
                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a className="dropdown-item" href="#">Edit</a>
-                                <a className="dropdown-item" href="#">Delete</a>
+                                <span className="dropdown-item">Edit</span>
+                                <span className="dropdown-item">Delete</span>
                             </div>
                         </div>
                     </div>
@@ -53,10 +54,10 @@ class stuffList extends React.Component {
 
     render() {
         console.log(this.props)
-        if (!this.props.stuff) {
+        if (!this.props.posts) {
             return (
                 <div>
-                    Loading Stuff...
+                    Loading Posts...
                 </div>
             )
         } else {
@@ -66,7 +67,7 @@ class stuffList extends React.Component {
                         <div className="row">
                             <div className="card-columns">
                                 {
-                                    this.props.stuff.map((item, index) => {
+                                    this.props.posts.map((item, index) => {
                                         return (
                                             this.renderData(item)
                                         );
@@ -82,24 +83,31 @@ class stuffList extends React.Component {
     }
 }
 
-stuffList.propTypes = {
-    stuffActions: PropTypes.object,
-    stuff: PropTypes.array
+PostsContainer.propTypes = {
+    posts: PropTypes.array
 };
 
 function mapStateToProps(state) {
     return {
-        stuff: state.stuff
+        posts: state.posts
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        stuffActions: bindActionCreators(stuffActions, dispatch)
+        fetchPosts: () => {
+            dispatch(fetchPosts());
+        },
+        receivePosts: (data) => {
+            dispatch(receivePosts(data));
+        },
+        toggleLike: (id) => {
+            dispatch(toggleLike(id));
+        }
     };
 }
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(stuffList);
+)(PostsContainer);
