@@ -21,7 +21,7 @@ export function fetchFoodList() {
 export function setFoodList(data) {
   return dispatch => {
     dispatch({
-      type: actionType.FETCH_FOODLIST,
+      type: actionType.SET_FOODLIST,
       payload: data,
     });
   }
